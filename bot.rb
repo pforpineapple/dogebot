@@ -40,10 +40,12 @@ Bot.on :message do |message|
 
   Bot.deliver(
     recipient: message.sender,
-    attachment: {
-      type: 'image',
-      payload: {
-        url: build_such_wow(message.text.split || DEFAULT_WORDS.sample(3))
+    message: {
+      attachment: {
+        type: 'image',
+        payload: {
+          url: build_such_wow(message.text.split || DEFAULT_WORDS.sample(3))
+        }
       }
     }
   )
