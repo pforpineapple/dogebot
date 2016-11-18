@@ -54,6 +54,10 @@ def reply_doge(message, words)
   )
 end
 
+def sanitize_words(words)
+  words.map { |word| word.gsub(/[^0-9A-Za-z]/, '') }
+end
+
 Facebook::Messenger::Thread.set(
   setting_type: 'greeting',
   greeting: {
@@ -91,7 +95,7 @@ Facebook::Messenger::Thread.set(
 Bot.on :message do |message|
   puts "Received message '#{message.inspect}' from #{message.sender}"
 
-  words = message.text.nil? ? DEFAULT_WORDS.sample(3) : message.text.split
+  words = message.text.nil? ? DEFAULT_WORDS.sample(3) : sanitize_words(message.text.split)
 
   reply_doge(message, words)
 end
