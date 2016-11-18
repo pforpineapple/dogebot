@@ -38,7 +38,8 @@ end
 Bot.on :message do |message|
   puts "Received '#{message.inspect}' from #{message.sender}"
 
-  message.reply(
+  Bot.deliver(
+    recipient: message.sender,
     attachment: {
       type: 'image',
       payload: {
