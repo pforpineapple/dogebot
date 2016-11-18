@@ -35,11 +35,7 @@ def build_such_wow(words)
   '.png?split=false'
 end
 
-Bot.on :message do |message|
-  puts "Received '#{message.inspect}' from #{message.sender}"
-
-  words = message.text.nil? ? DEFAULT_WORDS.sample(3) : message.text.split
-
+def reply_doge(message, words)
   Bot.deliver(
     recipient: message.sender,
     message: {
@@ -51,4 +47,33 @@ Bot.on :message do |message|
       }
     }
   )
+end
+
+Facebook::Messenger::Thread.set(
+  setting_type: 'greeting',
+  greeting: {
+    text: 'Wow, Such wow, much bot, so entertaining',
+  }
+)
+
+Facebook::Messenger::Thread.set(
+  setting_type: 'call_to_actions',
+  thread_state: 'new_thread',
+  call_to_actions: [
+    {
+      payload: 'WOW'
+    }
+  ]
+)
+
+Bot.on :message do |message|
+  puts "Received '#{message.inspect}' from #{message.sender}"
+
+  words = message.text.nil? ? DEFAULT_WORDS.sample(3) : message.text.split
+
+  reply_doge(message, words)
+end
+
+Bot.on :postback do |postback|
+  reply_doge(postback, DEFAULT_WORDS)
 end
