@@ -57,7 +57,7 @@ end
 Facebook::Messenger::Thread.set(
   setting_type: 'greeting',
   greeting: {
-    text: 'Wow, Such wow, much bot, so entertaining',
+    text: 'Such wow, much bot, so entertaining. wow! doge',
   }
 )
 
