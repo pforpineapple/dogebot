@@ -84,7 +84,7 @@ Facebook::Messenger::Thread.set(
 )
 
 Bot.on :message do |message|
-  puts "Received '#{message.inspect}' from #{message.sender}"
+  puts "Received message '#{message.inspect}' from #{message.sender}"
 
   words = message.text.nil? ? DEFAULT_WORDS.sample(3) : message.text.split
 
@@ -92,5 +92,7 @@ Bot.on :message do |message|
 end
 
 Bot.on :postback do |postback|
+  puts "Received postback '#{postback.inspect}' from #{postback.sender}"
+
   reply_doge(postback, DEFAULT_WORDS)
 end
