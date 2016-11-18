@@ -38,13 +38,15 @@ end
 Bot.on :message do |message|
   puts "Received '#{message.inspect}' from #{message.sender}"
 
+  words = message.text.nil? ? DEFAULT_WORDS.sample(3) : message.text.split
+
   Bot.deliver(
     recipient: message.sender,
     message: {
       attachment: {
         type: 'image',
         payload: {
-          url: build_such_wow(message.text.split || DEFAULT_WORDS.sample(3))
+          url: build_such_wow(words)
         }
       }
     }
