@@ -66,6 +66,23 @@ Facebook::Messenger::Thread.set(
   ]
 )
 
+Facebook::Messenger::Thread.set(
+  setting_type: 'call_to_actions',
+  thread_state: 'existing_thread',
+  call_to_actions: [
+    {
+      type: 'postback',
+      title: 'Wow',
+      payload: 'WOW'
+    },
+    {
+      type: 'postback',
+      title: 'Much amazing',
+      payload: 'WOW'
+    },
+  ]
+)
+
 Bot.on :message do |message|
   puts "Received '#{message.inspect}' from #{message.sender}"
 
